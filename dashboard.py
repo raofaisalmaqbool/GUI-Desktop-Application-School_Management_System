@@ -13,12 +13,16 @@ class LMS:
         self.root.config(bg="white")     # color of background
 
         #==== Logo ======
-        self.logo = ImageTk.PhotoImage(file="img/logo-small.png")    # adding image with title
+        self.logo = Image.open("img/logo-small.png")    # this is due to resize the image
+        self.logo = self.logo.resize((40,40), Image.ANTIALIAS)   # resizing the image
+        self.logo = ImageTk.PhotoImage(self.logo)    # adding image with title,, dont know the path of image
+        # self.logo = ImageTk.PhotoImage(file="img/logo-small.png")
+        
 
         #==== Title bar ======
-        # set the title bar.. heading... darkblue background
+        # set the title bar.. heading... darkblue background        "fg used for font"
         title = Label(self.root, text="School Management System", compound=LEFT, padx=20, image=self.logo, font=(
-            "goudy old style", 20, "bold"), bg="darkblue", fg="white").place(x=0, y=0, relwidth=1, height=50)
+            "goudy old style", 20, "bold"), bg="#0b5377", fg="white").place(x=0, y=0, relwidth=1, height=50)
 
         #==== Main Frame ======
         M_Frame = LabelFrame(self.root, text="Menu", font=("times new roman",15), bg="white")
@@ -33,9 +37,15 @@ class LMS:
         but_logout = Button(M_Frame, text="Logout", font=("goudy old style",15,"bold"), bg="#0b5377", fg="white", cursor="hand2").place(x=1120, y=5, height=40, width=200)
         # but_exit = Button(M_Frame, text="Exit", font=("goudy old style",15,"bold"), bg="#0b5377", fg="white", cursor="hand2").place(x=1050, y=5, height=40, width=200)
 
+        self.main_img = Image.open("img/img2.png")    # this is due to resize the image
+        self.main_img = self.main_img.resize((920,350), Image.ANTIALIAS)   # resizing the image
+        self.main_img = ImageTk.PhotoImage(self.main_img)    # adding image with title,, dont know the path of image
+
+        self.label_main_img = Label(self.root, image=self.main_img).place(x=400, y=160, width=920, height=350)
+
         # ==== Footer ====
         footer = Label(self.root, text="School Management System\nInfinity Solution",font=(
-            "goudy old style", 15), bg="gray", fg="white").pack(side=BOTTOM, fill=X)
+            "goudy old style", 15), bg="#262626", fg="white").pack(side=BOTTOM, fill=X)
 
 if __name__ == "__main__":     # it is using because i will deale with multiple files
     root = Tk()      # object of tkinter library
