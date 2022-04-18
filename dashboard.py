@@ -2,7 +2,11 @@ from tkinter import *      # python library used of GUI programming
 
 class LMS:
     def __init__(self, root):   # default constructor of LMS class having orguments of self(bydefault) & root
-        pass
+        self.root = root  # re-initilize the root ,, attribute
+        self.root.title("School Management System")     # change the title of of application
+        self.root.geometry("1350x700+0+0")    # change the size and (height, width, margan pading)
+        self.root.config(bg="white")     # color of background
+       
 
 if __name__ == "__main__":     # it is using because i will deale with multiple files
     root = Tk()      # object of tkinter library
