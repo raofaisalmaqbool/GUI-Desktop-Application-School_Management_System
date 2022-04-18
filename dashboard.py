@@ -41,7 +41,18 @@ class LMS:
         self.main_img = self.main_img.resize((920,350), Image.ANTIALIAS)   # resizing the image
         self.main_img = ImageTk.PhotoImage(self.main_img)    # adding image with title,, dont know the path of image
 
+        # show the image on secreen
         self.label_main_img = Label(self.root, image=self.main_img).place(x=400, y=160, width=920, height=350)
+
+        # ===== Update Details Widgets =====
+        self.course_details = Label(self.root, text="Total Courses\n[0]", font=("goudy old style",20), bd=10, relief=RIDGE, bg="#e43b06")
+        self.course_details.place(x=400, y=530, width=300, height=100)
+
+        self.student_details = Label(self.root, text="Total Students\n[0]", font=("goudy old style",20), bd=10, relief=RIDGE, bg="#0676ad")
+        self.student_details.place(x=710, y=530, width=300, height=100)
+
+        self.result_details = Label(self.root, text="Total Results\n[0]", font=("goudy old style",20), bd=10, relief=RIDGE, bg="#038074")
+        self.result_details.place(x=1020, y=530, width=300, height=100)
 
         # ==== Footer ====
         footer = Label(self.root, text="School Management System\nInfinity Solution",font=(
