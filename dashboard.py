@@ -7,7 +7,7 @@ class LMS:
     def __init__(self, root):
         self.root = root  # re-initilize the root ,, attribute
         # change the title of of application
-        self.root.title("School Management System")
+        self.root.title("LMS")
         # change the size and (height, width, margan pading)
         self.root.geometry("1350x700+0+0")
         self.root.config(bg="white")     # color of background
@@ -32,6 +32,10 @@ class LMS:
         but_view = Button(M_Frame, text="View Students Results", font=("goudy old style",15,"bold"), bg="#0b5377", fg="white", cursor="hand2").place(x=900, y=5, height=40, width=200)
         but_logout = Button(M_Frame, text="Logout", font=("goudy old style",15,"bold"), bg="#0b5377", fg="white", cursor="hand2").place(x=1120, y=5, height=40, width=200)
         # but_exit = Button(M_Frame, text="Exit", font=("goudy old style",15,"bold"), bg="#0b5377", fg="white", cursor="hand2").place(x=1050, y=5, height=40, width=200)
+
+        # ==== Footer ====
+        footer = Label(self.root, text="School Management System\nInfinity Solution",font=(
+            "goudy old style", 15), bg="gray", fg="white").pack(side=BOTTOM, fill=X)
 
 if __name__ == "__main__":     # it is using because i will deale with multiple files
     root = Tk()      # object of tkinter library
