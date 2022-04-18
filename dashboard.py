@@ -26,12 +26,12 @@ class LMS:
 
         #===== Buttons in the Menu =======
         but_courses = Button(M_Frame, text="Courses", font=("goudy old style",15,"bold"), bg="#0b5377", fg="white", cursor="hand2").place(x=20, y=5, height=40, width=200)
-        but_teachers = Button(M_Frame, text="Teachers", font=("goudy old style",15,"bold"), bg="#0b5377", fg="white", cursor="hand2").place(x=20, y=5, height=40, width=200)
-        but_students = Button(M_Frame, text="Students", font=("goudy old style",15,"bold"), bg="#0b5377", fg="white", cursor="hand2").place(x=20, y=5, height=40, width=200)
-        but_result = Button(M_Frame, text="Result", font=("goudy old style",15,"bold"), bg="#0b5377", fg="white", cursor="hand2").place(x=20, y=5, height=40, width=200)
-        but_view = Button(M_Frame, text="View Students Results", font=("goudy old style",15,"bold"), bg="#0b5377", fg="white", cursor="hand2").place(x=20, y=5, height=40, width=200)
-        but_logout = Button(M_Frame, text="Logout", font=("goudy old style",15,"bold"), bg="#0b5377", fg="white", cursor="hand2").place(x=20, y=5, height=40, width=200)
-        but_exit = Button(M_Frame, text="Exit", font=("goudy old style",15,"bold"), bg="#0b5377", fg="white", cursor="hand2").place(x=20, y=5, height=40, width=200)
+        but_teachers = Button(M_Frame, text="Teachers", font=("goudy old style",15,"bold"), bg="#0b5377", fg="white", cursor="hand2").place(x=240, y=5, height=40, width=200)
+        but_students = Button(M_Frame, text="Students", font=("goudy old style",15,"bold"), bg="#0b5377", fg="white", cursor="hand2").place(x=460, y=5, height=40, width=200)
+        but_result = Button(M_Frame, text="Result", font=("goudy old style",15,"bold"), bg="#0b5377", fg="white", cursor="hand2").place(x=680, y=5, height=40, width=200)
+        but_view = Button(M_Frame, text="View Students Results", font=("goudy old style",15,"bold"), bg="#0b5377", fg="white", cursor="hand2").place(x=900, y=5, height=40, width=200)
+        but_logout = Button(M_Frame, text="Logout", font=("goudy old style",15,"bold"), bg="#0b5377", fg="white", cursor="hand2").place(x=1120, y=5, height=40, width=200)
+        # but_exit = Button(M_Frame, text="Exit", font=("goudy old style",15,"bold"), bg="#0b5377", fg="white", cursor="hand2").place(x=1050, y=5, height=40, width=200)
 
 if __name__ == "__main__":     # it is using because i will deale with multiple files
     root = Tk()      # object of tkinter library
