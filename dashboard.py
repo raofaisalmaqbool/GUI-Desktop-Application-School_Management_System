@@ -12,8 +12,10 @@ class LMS:
         self.root.geometry("1350x700+0+0")
         self.root.config(bg="white")     # color of background
 
+        self.logo = ImageTk.PhotoImage(file="img/logo-small.png")
+
         # set the title bar.. heading... darkblue background
-        title = Label(self.root, text="School Management System", font=(
+        title = Label(self.root, text="School Management System", compound=LEFT, padx=20, image=self.logo, font=(
             "goudy old style", 20, "bold"), bg="darkblue", fg="white").place(x=0, y=0, relwidth=1, height=50)
 
 
