@@ -5,6 +5,7 @@ def create_db(db_name):
     cursor_obj = my_obj.cursor()  # 3 create object of cursor
     # start use of try and except
     try:
+        # db = f"create database if not exists {db_name}"
         db = f"create database {db_name}"
         cursor_obj.execute(db)
         print(f"{db_name} database created")
@@ -12,5 +13,14 @@ def create_db(db_name):
     except:
         pass
 
-create_db("project_lms")
+def create_table(table_name):
+    conn_obj = mq.connect(host="localhost", user="root", password="", database="project_lms")
+    cursor_obj = conn_obj.cursor()
+    try:
+        cr_table = f"create table {table_name} (id INT AUTO_INCREMENT PRIMARY KEY)"
+        cursor_obj.execute(cr_table)
+    except:
+        print("error")
 
+create_db("project_lms")
+create_table("course")
