@@ -19,7 +19,9 @@ class CourseCls:
             "goudy old style", 20, "bold"), bg="#0b5377", fg="white").place(x=10, y=15, width=1180, height=35)
 
         # ======= Variables ==========
-        
+        self.var_course = StringVar()
+        self.var_duration = StringVar()
+        self.var_charges = StringVar()
 
         # =========== Label of input fields =============
         Course_Name = Label(self.root, text="Course Name",font=("goudy old style", 15, "bold"),bg="white", fg="black").place(x=10, y=60)
