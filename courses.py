@@ -35,7 +35,17 @@ class CourseCls:
         input_Duration = Entry(self.root, textvariable=self.var_duration, font=("goudy old style", 15, "bold"),bg="lightyellow", fg="black").place(x=150, y=100, width=200)
         input_Charges = Entry(self.root, textvariable=self.var_charges, font=("goudy old style", 15, "bold"),bg="lightyellow", fg="black").place(x=150, y=140, width=200)
         self.input_Description = Text(self.root, font=("goudy old style", 15, "bold"),bg="lightyellow", fg="black")
-        self.input_Description.place(x=150, y=180, height=100, width=400)
+        self.input_Description.place(x=150, y=180, height=100, width=470)
+
+        # ========== operational buttons ============
+        self.btn_save = Button(self.root, text="Save", font=("goudy old style", 15, "bold"),bg="#2196f3", fg="white", cursor="hand2")
+        self.btn_save.place(x=150, y=400, width=110, height=40)
+        self.btn_update = Button(self.root, text="Update", font=("goudy old style", 15, "bold"),bg="#4caf50", fg="white", cursor="hand2")
+        self.btn_update.place(x=270, y=400, width=110, height=40)
+        self.btn_delete = Button(self.root, text="Delete", font=("goudy old style", 15, "bold"),bg="#f44336", fg="white", cursor="hand2")
+        self.btn_delete.place(x=390, y=400, width=110, height=40)
+        self.btn_clear = Button(self.root, text="Clear", font=("goudy old style", 15, "bold"),bg="#607d8b", fg="white", cursor="hand2")
+        self.btn_clear.place(x=510, y=400, width=110, height=40)
 
 
 
