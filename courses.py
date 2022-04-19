@@ -64,9 +64,9 @@ class CourseCls:
         # ========== Search Area ============
         self.var_search = StringVar()
         Course_Name = Label(self.root, text="Course Name", font=(
-            "goudy old style", 15, "bold"), bg="white", fg="black").place(x=720, y=80)
+            "goudy old style", 15, "bold"), bg="white", fg="black").place(x=660, y=80)
         input_Course_Name = Entry(self.root, textvariable=self.var_search, font=(
-            "goudy old style", 15, "bold"), bg="lightyellow", fg="black").place(x=870, y=80, width=180)
+            "goudy old style", 15, "bold"), bg="lightyellow", fg="black").place(x=810, y=80, width=250)
         btn_Course_Search = Button(self.root, text="Search", font=(
             "goudy old style", 15, "bold"), bg="#4caf50", fg="white", cursor="hand2").place(x=1090, y=80, width=100, height=27)
 
@@ -79,6 +79,7 @@ class CourseCls:
         scrollx = Scrollbar(self.C_Frame, orient=HORIZONTAL)
         scrolly = Scrollbar(self.C_Frame, orient=VERTICAL)
 
+        # ======= create table layout ========
         self.courseTable = ttk.Treeview(self.C_Frame, columns=(
             "cid", "name", "duration", "charges", "description"), xscrollcommand=scrollx.set, yscrollcommand=scrolly.set)
 
@@ -103,7 +104,7 @@ class CourseCls:
         self.courseTable.column("charges", width=50)
         self.courseTable.column("description", width=130)
 
-        self.courseTable.pack(fill=BOTH, expand=1)
+        self.courseTable.pack(fill=BOTH, expand=1)    # show create table layout
 
 
 
