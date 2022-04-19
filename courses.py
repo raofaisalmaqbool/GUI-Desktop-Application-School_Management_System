@@ -30,10 +30,12 @@ class CourseCls:
         Course_Description = Label(self.root, text="Description",font=("goudy old style", 15, "bold"),bg="white", fg="black").place(x=10, y=180)
 
         # =========== input fields ============
-        input_Name = Entry(self.root, input_variable=self.var_course, font=("goudy old style", 15, "bold"),bg="white", fg="black").place(x=10, y=60)
-        input_Duration = Entry(self.root, input_variable=self.var_duration, font=("goudy old style", 15, "bold"),bg="white", fg="black").place(x=10, y=100)
-        input_Charges = Entry(self.root, input_variable=self.var_charges, font=("goudy old style", 15, "bold"),bg="white", fg="black").place(x=10, y=140)
-        input_Description = Text(self.root, font=("goudy old style", 15, "bold"),bg="white", fg="black").place(x=10, y=180)
+        self.input_Name = Entry(self.root, textvariable=self.var_course, font=("goudy old style", 15, "bold"),bg="white", fg="black")
+        self.input_Name.place(x=150, y=60, width=200)
+        input_Duration = Entry(self.root, textvariable=self.var_duration, font=("goudy old style", 15, "bold"),bg="white", fg="black").place(x=150, y=100, width=200)
+        input_Charges = Entry(self.root, textvariable=self.var_charges, font=("goudy old style", 15, "bold"),bg="white", fg="black").place(x=150, y=140, width=200)
+        self.input_Description = Text(self.root, font=("goudy old style", 15, "bold"),bg="white", fg="black")
+        self.input_Description.place(x=150, y=180, height=100, width=400)
 
 
 
