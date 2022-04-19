@@ -1,6 +1,7 @@
 from tkinter import *      # python library used of GUI programming
 from PIL import Image, ImageTk
-from tkinter import ttk
+from tkinter import ttk, messagebox
+import pymysql as mq
 
 
 class CourseCls:
@@ -107,8 +108,16 @@ class CourseCls:
         self.courseTable.pack(fill=BOTH, expand=1)    # show create table layout
 
 
-
     #==========  backend functions start ============
+
+    def save(self):
+        conn_obj = mq.connect(host="localhost", user="root", password="", database="project_lms")
+        cursor_obj = conn_obj.cursor()
+        try:
+            pass
+        except Exception as ex:
+            messagebox.showerror("error", f"Error due to {str(ex)}")
+
 
 if __name__ == "__main__":     # it is using because i will deale with multiple files
     root = Tk()      # object of tkinter library
