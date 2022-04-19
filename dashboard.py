@@ -48,13 +48,13 @@ class LMS:
         # this is due to resize the image
         self.main_img = Image.open("img/img2.png")
         self.main_img = self.main_img.resize(
-            (920, 350), Image.ANTIALIAS)   # resizing the image
+            (760, 350), Image.ANTIALIAS)   # resizing the image
         # adding image with title,, dont know the path of image
         self.main_img = ImageTk.PhotoImage(self.main_img)
 
         # show the image on secreen
         self.label_main_img = Label(self.root, image=self.main_img).place(
-            x=400, y=160, width=920, height=350)
+            x=520, y=160, width=760, height=350)
 
         # ===== Update Details Widgets =====
         self.course_details = Label(self.root, text="Total Courses\n[0]", font=(
