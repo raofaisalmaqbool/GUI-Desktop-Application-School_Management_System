@@ -21,7 +21,14 @@ class CourseCls:
         # ======= Variables ==========
         
 
+        # =========== Label of input fields =============
+        Course_Name = Label(self.root, text="Course Name",font=("goudy old style", 15, "bold"),bg="white", fg="black").place(x=10, y=60)
+        Course_Duration = Label(self.root, text="Duration",font=("goudy old style", 15, "bold"),bg="white", fg="black").place(x=10, y=100)
+        Course_Charges = Label(self.root, text="Charges",font=("goudy old style", 15, "bold"),bg="white", fg="black").place(x=10, y=140)
+        Course_Description = Label(self.root, text="Description",font=("goudy old style", 15, "bold"),bg="white", fg="black").place(x=10, y=180)
+
        
+
 
 if __name__ == "__main__":     # it is using because i will deale with multiple files
     root = Tk()      # object of tkinter library
