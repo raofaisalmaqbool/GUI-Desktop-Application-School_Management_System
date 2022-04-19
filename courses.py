@@ -18,20 +18,20 @@ class CourseCls:
         title_bar = Label(self.root, text="Manage Course Details",font=(
             "goudy old style", 20, "bold"), bg="#0b5377", fg="white").place(x=10, y=15, width=1180, height=35)
 
-        # ======= Variables ==========
+        # ======= Variables ==========   will store the given value form user
         self.var_course = StringVar()
         self.var_duration = StringVar()
         self.var_charges = StringVar()
 
-        # =========== Label of input fields =============
+        # =========== Label of input fields (fields titles) =============
         Course_Name = Label(self.root, text="Course Name",font=("goudy old style", 15, "bold"),bg="white", fg="black").place(x=10, y=60)
         Course_Duration = Label(self.root, text="Duration",font=("goudy old style", 15, "bold"),bg="white", fg="black").place(x=10, y=100)
         Course_Charges = Label(self.root, text="Charges",font=("goudy old style", 15, "bold"),bg="white", fg="black").place(x=10, y=140)
         Course_Description = Label(self.root, text="Description",font=("goudy old style", 15, "bold"),bg="white", fg="black").place(x=10, y=180)
 
-        # =========== input fields ============
+        # =========== input fields ============  textvariable is keyword
         self.input_Name = Entry(self.root, textvariable=self.var_course, font=("goudy old style", 15, "bold"),bg="white", fg="black")
-        self.input_Name.place(x=150, y=60, width=200)
+        self.input_Name.place(x=150, y=60, width=200)    # will show input fields
         input_Duration = Entry(self.root, textvariable=self.var_duration, font=("goudy old style", 15, "bold"),bg="white", fg="black").place(x=150, y=100, width=200)
         input_Charges = Entry(self.root, textvariable=self.var_charges, font=("goudy old style", 15, "bold"),bg="white", fg="black").place(x=150, y=140, width=200)
         self.input_Description = Text(self.root, font=("goudy old style", 15, "bold"),bg="white", fg="black")
