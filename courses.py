@@ -47,7 +47,10 @@ class CourseCls:
         self.btn_clear = Button(self.root, text="Clear", font=("goudy old style", 15, "bold"),bg="#607d8b", fg="white", cursor="hand2")
         self.btn_clear.place(x=510, y=400, width=110, height=40)
 
-
+        #========== Search Area ============
+        Course_Name = Label(self.root, text="Course Name",font=("goudy old style", 15, "bold"),bg="white", fg="black").place(x=720, y=80)
+        input_Course_Name = Entry(self.root, textvariable=self.var_course, font=("goudy old style", 15, "bold"),bg="lightyellow", fg="black").place(x=860, y=80, width=180)
+        btn_Course_Search = Button(self.root, text="Search", font=("goudy old style", 15, "bold"),bg="#4caf50", fg="white", cursor="hand2").place(x=1060, y=80, width=100, height=27)
 
 if __name__ == "__main__":     # it is using because i will deale with multiple files
     root = Tk()      # object of tkinter library
