@@ -30,9 +30,9 @@ class CourseCls:
         Course_Description = Label(self.root, text="Description",font=("goudy old style", 15, "bold"),bg="white", fg="black").place(x=10, y=180)
 
         # =========== input fields ============
-        input_Name = Entry(self.root, font=("goudy old style", 15, "bold"),bg="white", fg="black").place(x=10, y=60)
-        input_Duration = Entry(self.root, font=("goudy old style", 15, "bold"),bg="white", fg="black").place(x=10, y=100)
-        input_Charges = Entry(self.root, font=("goudy old style", 15, "bold"),bg="white", fg="black").place(x=10, y=140)
+        input_Name = Entry(self.root, input_variable=self.var_course, font=("goudy old style", 15, "bold"),bg="white", fg="black").place(x=10, y=60)
+        input_Duration = Entry(self.root, input_variable=self.var_duration, font=("goudy old style", 15, "bold"),bg="white", fg="black").place(x=10, y=100)
+        input_Charges = Entry(self.root, input_variable=self.var_charges, font=("goudy old style", 15, "bold"),bg="white", fg="black").place(x=10, y=140)
         input_Description = Text(self.root, font=("goudy old style", 15, "bold"),bg="white", fg="black").place(x=10, y=180)
 
 
