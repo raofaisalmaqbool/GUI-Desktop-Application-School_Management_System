@@ -11,7 +11,7 @@ def create_db(db_name=None):
         # print(f"{db_name} database created")
 
     except:
-        pass
+        print("database error")
 
 def create_table(table_name, labels):
     conn_obj = mq.connect(host="localhost", user="root", password="", database="project_lms")
@@ -22,7 +22,7 @@ def create_table(table_name, labels):
         cursor_obj.execute(cr_table)
         # print(f"{table_name} table created")
     except:
-        pass
+        print("table error")
 
 create_db("project_lms")
-create_table("course", "id INT AUTO_INCREMENT PRIMARY KEY, name VARCHAR(255), address VARCHAR(255)")
+create_table("course", "cid INT AUTO_INCREMENT PRIMARY KEY, name VARCHAR(255), duration VARCHAR(255), charges BIGINT, description TEXT")

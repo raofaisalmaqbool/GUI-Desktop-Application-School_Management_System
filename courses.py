@@ -108,6 +108,8 @@ class CourseCls:
 
 
 
+    #==========  backend functions start ============
+
 if __name__ == "__main__":     # it is using because i will deale with multiple files
     root = Tk()      # object of tkinter library
     # object of LMS class having arggument root(object of tkinter libraroy)
