@@ -1,5 +1,6 @@
 from tkinter import *      # python library used of GUI programming
 from PIL import Image, ImageTk
+from tkinter import ttk
 
 
 class CourseCls:
@@ -55,7 +56,26 @@ class CourseCls:
 
         # ======= content / record of courses ========
         self.C_Frame = Frame(self.root, bd=2, relief=RIDGE)
-        self.C_Frame.place(x=720, y=120, height=340, width=470)
+        self.C_Frame.place(x=720, y=120, height=320, width=470)
+
+        # ========= create table frame inside the course content ========
+        self.courseTable = ttk.Treeview(self.C_Frame, columns=("cid", "name", "duration", "charges", "description"))
+
+        self.courseTable.heading("cid", text="ID")       # create table heading
+        self.courseTable.heading("name", text="Name")
+        self.courseTable.heading("duration", text="Duration")
+        self.courseTable.heading("charges", text="Charges")
+        self.courseTable.heading("description", text="Description")
+
+        self.courseTable["show"]="headings"  # show only heading colomn not extra one
+
+        self.courseTable.column("cid", width=30)       # create table colomn
+        self.courseTable.column("name", width=50)
+        self.courseTable.column("duration", width=50)
+        self.courseTable.column("charges", width=50)
+        self.courseTable.column("description", width=130)
+
+        self.courseTable.pack(fill=BOTH, expand=1)
 
 
 if __name__ == "__main__":     # it is using because i will deale with multiple files
