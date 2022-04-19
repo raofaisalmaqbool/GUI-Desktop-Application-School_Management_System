@@ -13,16 +13,16 @@ def create_db(db_name=None):
     except:
         pass
 
-def create_table(table_name=None, labels=None):
+def create_table(table_name, labels):
     conn_obj = mq.connect(host="localhost", user="root", password="", database="project_lms")
     cursor_obj = conn_obj.cursor()
     try:
         # cr_table = f"create table if not exists {table_name} (id INT AUTO_INCREMENT PRIMARY KEY)"
-        cr_table = f"create table {table_name} (id INT AUTO_INCREMENT PRIMARY KEY, {labels})"
+        cr_table = f"create table {table_name} ({labels})"
         cursor_obj.execute(cr_table)
         # print(f"{table_name} table created")
     except:
         pass
 
 create_db("project_lms")
-create_table("course", "name VARCHAR(255), address VARCHAR(255)")
+create_table("course", "id INT AUTO_INCREMENT PRIMARY KEY, name VARCHAR(255), address VARCHAR(255)")
