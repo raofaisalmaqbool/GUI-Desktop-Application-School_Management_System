@@ -24,5 +24,16 @@ def create_table(table_name, labels):
     except:
         print("table error")
 
+def insert_data(table_name, labels, input_data):
+    conn_obj = mq.connect(host="localhost", user="root", password="", database="project_lms")
+    cursor_obj = conn_obj.cursor()
+    try:
+        # cr_table = f"create table if not exists {table_name} (id INT AUTO_INCREMENT PRIMARY KEY)"
+        ins_data = f"INSERT INTO {table_name} ({labels}) VALUES({input_data})"
+        cursor_obj.execute(ins_data)
+        # print(f"{table_name} table created")
+    except:
+        print("insert date error")
+
 create_db("project_lms")
 create_table("course", "cid INT AUTO_INCREMENT PRIMARY KEY, name VARCHAR(255), duration VARCHAR(255), charges BIGINT, description TEXT")

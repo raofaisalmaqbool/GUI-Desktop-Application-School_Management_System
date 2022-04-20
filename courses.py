@@ -2,6 +2,7 @@ from tkinter import *      # python library used of GUI programming
 from PIL import Image, ImageTk
 from tkinter import ttk, messagebox
 import pymysql as mq
+from project_db import *
 
 
 class CourseCls:
@@ -111,13 +112,14 @@ class CourseCls:
     #==========  backend functions start ============
 
     def save(self):
-        conn_obj = mq.connect(host="localhost", user="root", password="", database="project_lms")
-        cursor_obj = conn_obj.cursor()
+        # conn_obj = mq.connect(host="localhost", user="root", password="", database="project_lms")
+        # cursor_obj = conn_obj.cursor()
         try:
             if self.var_course.get() == "":
                 messagebox.showerror("Error","Course name should be required", parent=self.root)
             else:
-                pass
+                insert_data("course", "name, duration, charges, description", '''self.var_course.get(), self.var_duration.get(), self.var_charges.get(), self.var_duration.get("1.0", END)''')
+                
         except Exception as ex:
             messagebox.showerror("Error", f"Error due to {str(ex)}")
 
