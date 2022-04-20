@@ -109,6 +109,8 @@ class CourseCls:
 
         self.courseTable.pack(fill=BOTH, expand=1)    # show create table layout
 
+        self.show()
+
 
     #==========  backend functions start ============
 
@@ -127,7 +129,8 @@ class CourseCls:
                 # labels = (name, duration, charges, description)
 
                 #========= calling functions of insert_data =======
-                insert_data("course", '''(name, duration, charges, description)''', input_tuple)   
+                insert_data("course", '''(name, duration, charges, description)''', input_tuple) 
+                self.show()  
                 
         except Exception as ex:
             messagebox.showerror("Error", f"Error due to {str(ex)}")
@@ -135,8 +138,12 @@ class CourseCls:
     def show(self):
     
         try:
+            rows = fetch_tabel_data("course")
+            # print(rows)
             self.courseTable.delete(*self.courseTable.get_children())
-            
+            for row in rows:
+                self.courseTable.insert('', END, values=row)
+
                 
                 
         except Exception as ex:

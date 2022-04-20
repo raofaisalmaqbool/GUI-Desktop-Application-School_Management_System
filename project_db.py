@@ -45,6 +45,7 @@ def fetch_tabel_data(table_name):
     try:
         cursor_obj.execute(f"select * from {table_name}")
         all_data = cursor_obj.fetchall()
+        # print(all_data)
         return all_data
     except Exception as ex:
         print(ex)
@@ -52,3 +53,4 @@ def fetch_tabel_data(table_name):
 create_db("project_lms")
 create_table("course", "cid INT AUTO_INCREMENT PRIMARY KEY, name VARCHAR(255), duration VARCHAR(255), charges VARCHAR(255), description TEXT")
 # insert_data("course", '''(name, duration, charges, description)''', '''("faisal","3 months","4500","abc")''')
+# fetch_tabel_data("course")
