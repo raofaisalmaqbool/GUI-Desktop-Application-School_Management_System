@@ -157,8 +157,14 @@ class CourseCls:
         content = self.courseTable.item(r)
         row = content["values"]
         # print(row)
+        self.var_course.set(row[1])
+        self.var_duration.set(row[2])
+        self.var_charges.set(row[3])
 
-        
+        self.input_Description.delete('1.0', END)
+        self.input_Description.insert(END, row[4])
+
+
 
 
 if __name__ == "__main__":     # it is using because i will deale with multiple files

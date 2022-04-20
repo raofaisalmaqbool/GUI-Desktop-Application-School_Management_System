@@ -43,10 +43,10 @@ def fetch_tabel_data(table_name):
     conn_obj = mq.connect(host="localhost", user="root", password="", database="project_lms")
     cursor_obj = conn_obj.cursor()
     try:
-        cursor_obj.execute(f"select * from {table_name}")
-        all_data = cursor_obj.fetchall()
+        cursor_obj.execute(f"select * from {table_name}")    # will execute the statment
+        all_data = cursor_obj.fetchall()    # fetch all data of table
         # print(all_data)
-        return all_data
+        return all_data         # return the data 
     except Exception as ex:
         print(ex)
 
