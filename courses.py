@@ -125,9 +125,19 @@ class CourseCls:
                 description_val = self.input_Description.get("1.0", END)    # direct value get by varialbe
                 input_tuple = (name_val, duration_val, charges_val, description_val)
                 # labels = (name, duration, charges, description)
-                
+
                 #========= calling functions of insert_data =======
                 insert_data("course", '''(name, duration, charges, description)''', input_tuple)   
+                
+        except Exception as ex:
+            messagebox.showerror("Error", f"Error due to {str(ex)}")
+
+    def show(self):
+    
+        try:
+            self.courseTable.delete(*self.courseTable.get_children())
+            
+                
                 
         except Exception as ex:
             messagebox.showerror("Error", f"Error due to {str(ex)}")

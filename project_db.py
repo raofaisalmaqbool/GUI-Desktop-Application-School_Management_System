@@ -1,4 +1,6 @@
+from logging import root
 import pymysql as mq
+from tkinter import ttk, messagebox
 
 def create_db(db_name=None):
     my_obj = mq.connect(host="localhost", user="root", password="")  # crate connection with database
@@ -28,13 +30,22 @@ def insert_data(table_name, labels, input_data):
     conn_obj = mq.connect(host="localhost", user="root", password="", database="project_lms")
     cursor_obj = conn_obj.cursor()
     try:
-        # cr_table = f"create table if not exists {table_name} (id INT AUTO_INCREMENT PRIMARY KEY)"
         ins_data = f"INSERT INTO {table_name} {labels} VALUES {input_data}"
-        cursor_obj.execute(ins_data)
-        conn_obj.commit()
-
+        cursor_obj.execute(ins_data)     # it will execute the command but not show data into the tabel
+        conn_obj.commit()     # this command will show the data into the table
+        # messagebox.showinfo("Success","Record Entered Successfully") 
         # print(f"{table_name} data inserted")
         # print(cursor_obj)
+    except Exception as ex:
+        print(ex)
+
+def fetch_tabel_data(table_name):
+    conn_obj = mq.connect(host="localhost", user="root", password="", database="project_lms")
+    cursor_obj = conn_obj.cursor()
+    try:
+        cursor_obj.execute(f"select * from {table_name}")
+        all_data = cursor_obj.fetchall()
+        return all_data
     except Exception as ex:
         print(ex)
 
