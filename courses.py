@@ -109,6 +109,7 @@ class CourseCls:
 
         self.courseTable.pack(fill=BOTH, expand=1)    # show create table layout
 
+        self.courseTable.bind("<ButtonRelease-1>", self.get_data)
         self.show()
 
 
@@ -135,6 +136,7 @@ class CourseCls:
         except Exception as ex:
             messagebox.showerror("Error", f"Error due to {str(ex)}")
 
+    
     def show(self):
     
         try:
@@ -148,6 +150,15 @@ class CourseCls:
                 
         except Exception as ex:
             messagebox.showerror("Error", f"Error due to {str(ex)}")
+
+
+    def get_data(self, evnt):
+        r=self.courseTable.focus()
+        content = self.courseTable.item(r)
+        row = content["values"]
+        # print(row)
+
+        
 
 
 if __name__ == "__main__":     # it is using because i will deale with multiple files
