@@ -29,11 +29,13 @@ def insert_data(table_name, labels, input_data):
     cursor_obj = conn_obj.cursor()
     try:
         # cr_table = f"create table if not exists {table_name} (id INT AUTO_INCREMENT PRIMARY KEY)"
-        ins_data = f"INSERT INTO {table_name} ({labels}) VALUES({input_data})"
+        ins_data = f"INSERT INTO {table_name} {labels} VALUES {input_data}"
         cursor_obj.execute(ins_data)
-        # print(f"{table_name} table created")
-    except:
-        print("insert date error")
+        print(f"{table_name} data inserted")
+        print(cursor_obj)
+    except Exception as ex:
+        print(ex)
 
 create_db("project_lms")
-create_table("course", "cid INT AUTO_INCREMENT PRIMARY KEY, name VARCHAR(255), duration VARCHAR(255), charges BIGINT, description TEXT")
+create_table("course", "cid INT AUTO_INCREMENT PRIMARY KEY, name VARCHAR(255), duration VARCHAR(255), charges VARCHAR(255), description TEXT")
+insert_data("course", '''(name, duration, charges, description)''', '''("faisal","3 months","4500","abc")''')
