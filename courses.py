@@ -1,3 +1,4 @@
+from cProfile import label
 from tkinter import *      # python library used of GUI programming
 from PIL import Image, ImageTk
 from tkinter import ttk, messagebox
@@ -115,10 +116,18 @@ class CourseCls:
         # conn_obj = mq.connect(host="localhost", user="root", password="", database="project_lms")
         # cursor_obj = conn_obj.cursor()
         try:
-            if self.var_course.get() == "":
+            if self.var_course.get() == "":    # validation
                 messagebox.showerror("Error","Course name should be required", parent=self.root)
             else:
-                insert_data("course", "name, duration, charges, description", '''self.var_course.get(), self.var_duration.get(), self.var_charges.get(), self.var_duration.get("1.0", END)''')
+                name_val = self.var_course.get()    # values getting form different fields
+                duration_val = self.var_duration.get()
+                charges_val = self.var_charges.get()
+                description_val = self.input_Description.get("1.0", END)    # direct value get by varialbe
+                input_tuple = (name_val, duration_val, charges_val, description_val)
+                # labels = (name, duration, charges, description)
+                
+                #========= calling functions of insert_data =======
+                insert_data("course", '''(name, duration, charges, description)''', input_tuple)   
                 
         except Exception as ex:
             messagebox.showerror("Error", f"Error due to {str(ex)}")
