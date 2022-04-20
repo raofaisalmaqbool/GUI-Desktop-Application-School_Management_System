@@ -50,7 +50,7 @@ class CourseCls:
 
         # ========== operational buttons ============
         self.btn_save = Button(self.root, text="Save", font=(
-            "goudy old style", 15, "bold"), bg="#2196f3", fg="white", cursor="hand2")
+            "goudy old style", 15, "bold"), bg="#2196f3", fg="white", cursor="hand2", command=self.save)
         self.btn_save.place(x=150, y=400, width=110, height=40)
         self.btn_update = Button(self.root, text="Update", font=(
             "goudy old style", 15, "bold"), bg="#4caf50", fg="white", cursor="hand2")
@@ -114,9 +114,12 @@ class CourseCls:
         conn_obj = mq.connect(host="localhost", user="root", password="", database="project_lms")
         cursor_obj = conn_obj.cursor()
         try:
-            pass
+            if self.var_course.get() == "":
+                messagebox.showerror("Error","Course name should be required", parent=self.root)
+            else:
+                pass
         except Exception as ex:
-            messagebox.showerror("error", f"Error due to {str(ex)}")
+            messagebox.showerror("Error", f"Error due to {str(ex)}")
 
 
 if __name__ == "__main__":     # it is using because i will deale with multiple files
