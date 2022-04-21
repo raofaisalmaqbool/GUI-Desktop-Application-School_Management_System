@@ -159,6 +159,8 @@ class CourseCls:
 
     # =========== this is for show table data in the fields for update ========
     def get_data(self, evnt):    #2nd   # for binding event one argument is mendetory "evnt"
+        self.input_Name.config(state="readonly")
+        self.input_Name
         r=self.courseTable.focus()
         content = self.courseTable.item(r)
         row = content["values"]
