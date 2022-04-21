@@ -55,7 +55,7 @@ class CourseCls:
             "goudy old style", 15, "bold"), bg="#2196f3", fg="white", cursor="hand2", command=self.save)
         self.btn_save.place(x=150, y=400, width=110, height=40)
         self.btn_update = Button(self.root, text="Update", font=(
-            "goudy old style", 15, "bold"), bg="#4caf50", fg="white", cursor="hand2")
+            "goudy old style", 15, "bold"), bg="#4caf50", fg="white", cursor="hand2", command=self.update)
         self.btn_update.place(x=270, y=400, width=110, height=40)
         self.btn_delete = Button(self.root, text="Delete", font=(
             "goudy old style", 15, "bold"), bg="#f44336", fg="white", cursor="hand2")
@@ -120,9 +120,9 @@ class CourseCls:
         # cursor_obj = conn_obj.cursor()
         try:
             if self.var_course.get() != "":
-                name_val = self.var_course.get()
-                Cur_name = fetch_tabel_data_one("course", "name", name_val)
-                print(Cur_name)
+                name_val = self.var_course.get()      # geting course name and storing into the variable
+                Cur_name = fetch_tabel_data_one("course", "name", name_val)  # calling function
+                # print(Cur_name)
                 if Cur_name != None:
                     messagebox.showerror("Error","Course name already exist", parent=self.root)
                 else:
@@ -171,6 +171,36 @@ class CourseCls:
 
         self.input_Description.delete('1.0', END)
         self.input_Description.insert(END, row[4])
+
+
+
+    def update(self):
+        # conn_obj = mq.connect(host="localhost", user="root", password="", database="project_lms")
+        # cursor_obj = conn_obj.cursor()
+        try:
+            # if self.var_course.get() != "":
+            #     name_val = self.var_course.get()      # geting course name and storing into the variable
+            #     Cur_name = fetch_tabel_data_one("course", "name", name_val)  # calling function
+            #     # print(Cur_name)
+            #     if Cur_name != None:
+            #         messagebox.showerror("Error","Course name already exist", parent=self.root)
+            if self.var_charges.get()=="":    # validation
+                messagebox.showerror("Error","Course name should be required", parent=self.root)
+            else:
+                name_val = self.var_course.get()    # values getting form different fields
+                duration_val = self.var_duration.get()
+                charges_val = self.var_charges.get()
+                description_val = self.input_Description.get("1.0", END)    # direct value get by varialbe
+                input_tuple = (name_val, duration_val, charges_val, description_val)
+                # labels = (name, duration, charges, description)
+
+                #========= calling functions of insert_data =======
+                # insert_data("course", '''(name, duration, charges, description)''', input_tuple) 
+                self.show()
+              
+                
+        except Exception as ex:
+            messagebox.showerror("Error", f"Error due to {str(ex)}")
 
 
 

@@ -56,25 +56,35 @@ def fetch_tabel_data(table_name):
     except Exception as ex:
         print(ex)
         
-
+# ======== this function will fetch one record ==========
 def fetch_tabel_data_one(table_name, cl_name, conndition):
     conn_obj = mq.connect(host="localhost", user="root", password="", database="project_lms")
     cursor_obj = conn_obj.cursor()
     try:
-        print(cl_name)
-        print(conndition)
         cursor_obj.execute(f'''select * from {table_name} where {cl_name}="{conndition}"''')    # will execute the statment
-        print("hello")
         one_data = cursor_obj.fetchone()    # fetch all data of table
-        
-        print("hello")
-        print(one_data)
-        print("hello")
+        # print(one_data)
         return one_data         # return the data 
     except Exception as ex:
-        print(ex)
+        # print(ex)
         return None
         
+
+# ========== this function is for update data from table / row =========
+def insert_data(table_name, labels, input_data):
+    conn_obj = mq.connect(host="localhost", user="root", password="", database="project_lms")
+    cursor_obj = conn_obj.cursor()
+    try:
+        ins_data = f"INSERT INTO {table_name} {labels} VALUES {input_data}"
+        cursor_obj.execute(ins_data)     # it will execute the command but not show data into the tabel
+        conn_obj.commit()     # this command will show the data into the table
+        # messagebox.showinfo("Success","Record Entered Successfully") 
+        # print(f"{table_name} data inserted")
+        # print(cursor_obj)
+    except Exception as ex:
+        print(ex)
+
+
 
 # create_db("project_lms")
 # create_table("course", "cid INT AUTO_INCREMENT PRIMARY KEY, name VARCHAR(255), duration VARCHAR(255), charges VARCHAR(255), description TEXT")
