@@ -119,19 +119,27 @@ class CourseCls:
         # conn_obj = mq.connect(host="localhost", user="root", password="", database="project_lms")
         # cursor_obj = conn_obj.cursor()
         try:
-            if self.var_course.get() == "":    # validation
-                messagebox.showerror("Error","Course name should be required", parent=self.root)
-            else:
-                name_val = self.var_course.get()    # values getting form different fields
-                duration_val = self.var_duration.get()
-                charges_val = self.var_charges.get()
-                description_val = self.input_Description.get("1.0", END)    # direct value get by varialbe
-                input_tuple = (name_val, duration_val, charges_val, description_val)
-                # labels = (name, duration, charges, description)
+            if self.var_course.get() != "":
+                name_val = self.var_course.get()
+                Cur_name = fetch_tabel_data_one("course", "name", name_val)
+                print(Cur_name)
+                if Cur_name != None:
+                    messagebox.showerror("Error","Course name already exist", parent=self.root)
+                else:
+                    name_val = self.var_course.get()    # values getting form different fields
+                    duration_val = self.var_duration.get()
+                    charges_val = self.var_charges.get()
+                    description_val = self.input_Description.get("1.0", END)    # direct value get by varialbe
+                    input_tuple = (name_val, duration_val, charges_val, description_val)
+                    # labels = (name, duration, charges, description)
 
-                #========= calling functions of insert_data =======
-                insert_data("course", '''(name, duration, charges, description)''', input_tuple) 
-                self.show()  
+                    #========= calling functions of insert_data =======
+                    insert_data("course", '''(name, duration, charges, description)''', input_tuple) 
+                    self.show()
+            
+            else:    # validation
+                messagebox.showerror("Error","Course name should be required", parent=self.root)
+              
                 
         except Exception as ex:
             messagebox.showerror("Error", f"Error due to {str(ex)}")
@@ -150,11 +158,13 @@ class CourseCls:
 
 
     # =========== this is for show table data in the fields for update ========
-    def get_data(self, evnt):    #2nd
+    def get_data(self, evnt):    #2nd   # for binding event one argument is mendetory "evnt"
         r=self.courseTable.focus()
         content = self.courseTable.item(r)
         row = content["values"]
         # print(row)
+        # ['1', 'python', '3 months', '30000', 'xyz']
+        # [ 0      1           2         3       4(direct-text)]
         self.var_course.set(row[1])
         self.var_duration.set(row[2])
         self.var_charges.set(row[3])

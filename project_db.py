@@ -55,8 +55,31 @@ def fetch_tabel_data(table_name):
         return all_data         # return the data 
     except Exception as ex:
         print(ex)
+        
+
+def fetch_tabel_data_one(table_name, cl_name, conndition):
+    conn_obj = mq.connect(host="localhost", user="root", password="", database="project_lms")
+    cursor_obj = conn_obj.cursor()
+    try:
+        print(cl_name)
+        print(conndition)
+        cursor_obj.execute(f'''select * from {table_name} where {cl_name}="{conndition}"''')    # will execute the statment
+        print("hello")
+        one_data = cursor_obj.fetchone()    # fetch all data of table
+        
+        print("hello")
+        print(one_data)
+        print("hello")
+        return one_data         # return the data 
+    except Exception as ex:
+        print(ex)
+        return None
+        
 
 # create_db("project_lms")
 # create_table("course", "cid INT AUTO_INCREMENT PRIMARY KEY, name VARCHAR(255), duration VARCHAR(255), charges VARCHAR(255), description TEXT")
-# insert_data("course", '''(name, duration, charges, description)''', '''("faisal","3 months","4500","abc")''')
-# fetch_tabel_data("course")
+# # insert_data("course", '''(name, duration, charges, description)''', '''("faisal","3 months","4500","abc")''')
+# # fetch_tabel_data("course")
+# h = "faisal"
+# exname = str(h)
+# fetch_tabel_data_one("course", "name", exname)
