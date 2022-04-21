@@ -179,7 +179,7 @@ class CourseCls:
         # cursor_obj = conn_obj.cursor()
         try:
             # if self.var_course.get() != "":
-            #     name_val = self.var_course.get()      # geting course name and storing into the variable
+            #     name_val = self.var_course.get()   # geting course name and storing into the variable
             #     Cur_name = fetch_tabel_data_one("course", "name", name_val)  # calling function
             #     # print(Cur_name)
             #     if Cur_name != None:
