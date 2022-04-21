@@ -15,6 +15,8 @@ def create_db(db_name=None):
     except:
         print("database error")
 
+
+# ====== this function is used to create new table ===========
 def create_table(table_name, labels):
     conn_obj = mq.connect(host="localhost", user="root", password="", database="project_lms")
     cursor_obj = conn_obj.cursor()
@@ -26,6 +28,8 @@ def create_table(table_name, labels):
     except:
         print("table error")
 
+
+# ========= this function will insert data in the table ==========
 def insert_data(table_name, labels, input_data):
     conn_obj = mq.connect(host="localhost", user="root", password="", database="project_lms")
     cursor_obj = conn_obj.cursor()
@@ -39,6 +43,8 @@ def insert_data(table_name, labels, input_data):
     except Exception as ex:
         print(ex)
 
+
+#======= this function will fetch the all data form table ========== 
 def fetch_tabel_data(table_name):
     conn_obj = mq.connect(host="localhost", user="root", password="", database="project_lms")
     cursor_obj = conn_obj.cursor()
@@ -50,7 +56,7 @@ def fetch_tabel_data(table_name):
     except Exception as ex:
         print(ex)
 
-create_db("project_lms")
-create_table("course", "cid INT AUTO_INCREMENT PRIMARY KEY, name VARCHAR(255), duration VARCHAR(255), charges VARCHAR(255), description TEXT")
+# create_db("project_lms")
+# create_table("course", "cid INT AUTO_INCREMENT PRIMARY KEY, name VARCHAR(255), duration VARCHAR(255), charges VARCHAR(255), description TEXT")
 # insert_data("course", '''(name, duration, charges, description)''', '''("faisal","3 months","4500","abc")''')
 # fetch_tabel_data("course")

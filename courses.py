@@ -136,23 +136,21 @@ class CourseCls:
         except Exception as ex:
             messagebox.showerror("Error", f"Error due to {str(ex)}")
 
-    
-    def show(self):
-    
+    # ===== This will show the data in the table ========
+    def show(self):   # 1st
         try:
             rows = fetch_tabel_data("course")
             # print(rows)
-            self.courseTable.delete(*self.courseTable.get_children())
-            for row in rows:
+            self.courseTable.delete(*self.courseTable.get_children())     # will delete all pre childern element of table 
+            for row in rows:    # will show the data in tabel by itreating
                 self.courseTable.insert('', END, values=row)
 
-                
-                
         except Exception as ex:
             messagebox.showerror("Error", f"Error due to {str(ex)}")
 
 
-    def get_data(self, evnt):
+    # =========== this is for show table data in the fields for update ========
+    def get_data(self, evnt):    #2nd
         r=self.courseTable.focus()
         content = self.courseTable.item(r)
         row = content["values"]
