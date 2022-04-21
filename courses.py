@@ -61,7 +61,7 @@ class CourseCls:
             "goudy old style", 15, "bold"), bg="#f44336", fg="white", cursor="hand2")
         self.btn_delete.place(x=390, y=400, width=110, height=40)
         self.btn_clear = Button(self.root, text="Clear", font=(
-            "goudy old style", 15, "bold"), bg="#607d8b", fg="white", cursor="hand2")
+            "goudy old style", 15, "bold"), bg="#607d8b", fg="white", cursor="hand2", command=self.clear_data)
         self.btn_clear.place(x=510, y=400, width=110, height=40)
 
         # ========== Search Area ============
@@ -167,7 +167,8 @@ class CourseCls:
         # print(row)
         # ['1', 'python', '3 months', '30000', 'xyz']
         # [ 0      1           2         3       4(direct-text)]
-        self.var_course.set(row[1])
+
+        self.var_course.set(row[1])     # using set function hear
         self.var_duration.set(row[2])
         self.var_charges.set(row[3])
 
@@ -205,6 +206,16 @@ class CourseCls:
         except Exception as ex:
             messagebox.showerror("Error", f"Error due to {str(ex)}")
 
+
+# ======== this function is for clear the field data and enter new data ======= 
+    def clear_data(self):
+        self.show()
+        self.var_course.set("")
+        self.var_duration.set("")
+        self.var_charges.set("")
+        self.input_Description.delete('1.0', END)
+        self.input_Name.config(state=NORMAL)    # state was readonly but now its normal
+        
 
 
 
