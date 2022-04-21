@@ -191,11 +191,12 @@ class CourseCls:
                 duration_val = self.var_duration.get()
                 charges_val = self.var_charges.get()
                 description_val = self.input_Description.get("1.0", END)    # direct value get by varialbe
-                input_tuple = (name_val, duration_val, charges_val, description_val)
+                input_tuple = (duration_val, charges_val, description_val, name_val)
                 # labels = (name, duration, charges, description)
 
                 #========= calling functions of insert_data =======
                 # insert_data("course", '''(name, duration, charges, description)''', input_tuple) 
+                update_data("course", input_tuple)
                 self.show()
               
                 

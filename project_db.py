@@ -71,12 +71,12 @@ def fetch_tabel_data_one(table_name, cl_name, conndition):
         
 
 # ========== this function is for update data from table / row =========
-def insert_data(table_name, labels, input_data):
+def update_data(table_name, input_data):
     conn_obj = mq.connect(host="localhost", user="root", password="", database="project_lms")
     cursor_obj = conn_obj.cursor()
     try:
-        ins_data = f"INSERT INTO {table_name} {labels} VALUES {input_data}"
-        cursor_obj.execute(ins_data)     # it will execute the command but not show data into the tabel
+        ins_data = f"UPDATE {table_name} duration=?, charges=?, description=? WHERE set name=?"
+        cursor_obj.execute(ins_data, input_data)     # it will execute the command but not show data into the tabel
         conn_obj.commit()     # this command will show the data into the table
         # messagebox.showinfo("Success","Record Entered Successfully") 
         # print(f"{table_name} data inserted")
@@ -93,3 +93,4 @@ def insert_data(table_name, labels, input_data):
 # h = "faisal"
 # exname = str(h)
 # fetch_tabel_data_one("course", "name", exname)
+# update_data("course", )
