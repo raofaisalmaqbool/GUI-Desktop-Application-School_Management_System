@@ -58,7 +58,7 @@ class CourseCls:
             "goudy old style", 15, "bold"), bg="#4caf50", fg="white", cursor="hand2", command=self.update)
         self.btn_update.place(x=270, y=400, width=110, height=40)
         self.btn_delete = Button(self.root, text="Delete", font=(
-            "goudy old style", 15, "bold"), bg="#f44336", fg="white", cursor="hand2")
+            "goudy old style", 15, "bold"), bg="#f44336", fg="white", cursor="hand2", command=self.delete_row)
         self.btn_delete.place(x=390, y=400, width=110, height=40)
         self.btn_clear = Button(self.root, text="Clear", font=(
             "goudy old style", 15, "bold"), bg="#607d8b", fg="white", cursor="hand2", command=self.clear_data)
@@ -186,8 +186,8 @@ class CourseCls:
             #     # print(Cur_name)
             #     if Cur_name != None:
             #         messagebox.showerror("Error","Course name already exist", parent=self.root)
-            if self.var_charges.get()=="":    # validation
-                messagebox.showerror("Error","Course name should be required", parent=self.root)
+            if self.var_course.get()=="":    # validation
+                messagebox.showerror("Error","Please select a course", parent=self.root)
             else:
                 name_val = self.var_course.get()    # values getting form different fields
                 duration_val = self.var_duration.get()
@@ -216,6 +216,25 @@ class CourseCls:
         self.var_search.set("")
         self.input_Description.delete('1.0', END)
         self.input_Name.config(state=NORMAL)    # state was readonly but now its normal
+
+
+# ========= this function is work for delete record from table =======
+    def delete_row(self):
+        try:
+            if self.var_course.get()=="":
+                messagebox.showerror("error", "Please select any course for delate", parent=self.root)
+            else:
+                op = messagebox.askyesno("Confirm", "Are you want to delete", parent=self.root)
+                if op == True:
+                    var = self.var_course.get()
+                    delete_record("course", var)
+                    self.clear_data()
+                    self.show()
+                    self.input_Name.config(state=NORMAL)
+                    messagebox.showinfo("Success","Record deleted", parent=self.root)
+
+        except Exception as ex:
+            pass
         
 
 

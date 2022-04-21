@@ -85,6 +85,17 @@ def update_data(table_name, input_data):
         print(ex)
 
 
+# =========== this function will work for delete record form database ======
+def delete_record(table_name,by_name):
+    conn_obj = mq.connect(host="localhost", user="root", password="", database="project_lms")
+    cursor_obj = conn_obj.cursor()
+    try:
+        del_data = f'''DELETE from {table_name} WHERE name="{by_name}"'''
+        cursor_obj.execute(del_data)
+        conn_obj.commit()
+        print("data deleted")
+    except Exception as ex:
+        print(ex)
 
 # create_db("project_lms")
 # create_table("course", "cid INT AUTO_INCREMENT PRIMARY KEY, name VARCHAR(255), duration VARCHAR(255), charges VARCHAR(255), description TEXT")
