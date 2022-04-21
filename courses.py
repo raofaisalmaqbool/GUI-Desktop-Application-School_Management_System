@@ -173,7 +173,6 @@ class CourseCls:
         self.input_Description.insert(END, row[4])
 
 
-
     def update(self):
         # conn_obj = mq.connect(host="localhost", user="root", password="", database="project_lms")
         # cursor_obj = conn_obj.cursor()
@@ -198,6 +197,7 @@ class CourseCls:
                 # insert_data("course", '''(name, duration, charges, description)''', input_tuple) 
                 update_data("course", input_tuple)
                 self.show()
+                messagebox.showinfo("Success","Record Updated Successfully!!!!!", parent=self.root)
               
                 
         except Exception as ex:

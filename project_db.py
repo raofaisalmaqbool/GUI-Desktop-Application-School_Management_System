@@ -78,7 +78,7 @@ def update_data(table_name, input_data):
         ins_data = f'''UPDATE {table_name} SET duration="%s", charges="%s", description="%s" WHERE name="%s"''' % input_data
         cursor_obj.execute(ins_data)     # it will execute the command but not show data into the tabel
         conn_obj.commit()     # this command will show the data into the table
-        # messagebox.showinfo("Success","Record Entered Successfully") 
+        # messagebox.showinfo("Success","Record Updated Successfully") 
         # print(f"{table_name} data inserted")
         print("cursor_obj")
     except Exception as ex:
