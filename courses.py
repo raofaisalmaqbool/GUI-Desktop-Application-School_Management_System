@@ -213,6 +213,7 @@ class CourseCls:
         self.var_course.set("")
         self.var_duration.set("")
         self.var_charges.set("")
+        self.var_search.set("")
         self.input_Description.delete('1.0', END)
         self.input_Name.config(state=NORMAL)    # state was readonly but now its normal
         
