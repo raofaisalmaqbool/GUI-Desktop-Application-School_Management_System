@@ -23,22 +23,22 @@ class StudentCls:
             "goudy old style", 20, "bold"), bg="#0b5377", fg="white").place(x=10, y=15, width=1180, height=35)
 
         # ======= Variables ==========   will store the given value form user
-        self.var_course = StringVar()
+        self.var_rollno = StringVar()
         self.var_duration = StringVar()
         self.var_charges = StringVar()
 
         # =========== Label of input fields (fields titles) =============
-        Course_Name = Label(self.root, text="Course Name", font=(
+        Student_Rollno = Label(self.root, text="Roll No", font=(
             "goudy old style", 15, "bold"), bg="white", fg="black").place(x=10, y=80)
-        Course_Duration = Label(self.root, text="Duration", font=(
+        Student_Name = Label(self.root, text="Name", font=(
             "goudy old style", 15, "bold"), bg="white", fg="black").place(x=10, y=120)
-        Course_Charges = Label(self.root, text="Charges", font=(
+        Student_Email = Label(self.root, text="Email", font=(
             "goudy old style", 15, "bold"), bg="white", fg="black").place(x=10, y=160)
-        Course_Description = Label(self.root, text="Description", font=(
+        Student_Gender = Label(self.root, text="Gender", font=(
             "goudy old style", 15, "bold"), bg="white", fg="black").place(x=10, y=200)
 
         # =========== input fields ============  textvariable is keyword
-        self.input_Name = Entry(self.root, textvariable=self.var_course, font=(
+        self.input_Name = Entry(self.root, textvariable=self.var_rollno, font=(
             "goudy old style", 15, "bold"), bg="lightyellow", fg="black")
         # will show input fields
         self.input_Name.place(x=150, y=80, width=200)
@@ -119,14 +119,14 @@ class StudentCls:
         # conn_obj = mq.connect(host="localhost", user="root", password="", database="project_lms")
         # cursor_obj = conn_obj.cursor()
         try:
-            if self.var_course.get() != "":
-                name_val = self.var_course.get()      # geting course name and storing into the variable
+            if self.var_rollno.get() != "":
+                name_val = self.var_rollno.get()      # geting course name and storing into the variable
                 Cur_name = fetch_tabel_data_one("course", "name", name_val)  # calling function
                 # print(Cur_name)
                 if Cur_name != None:
                     messagebox.showerror("Error","Course name already exist", parent=self.root)
                 else:
-                    name_val = self.var_course.get()    # values getting form different fields
+                    name_val = self.var_rollno.get()    # values getting form different fields
                     duration_val = self.var_duration.get()
                     charges_val = self.var_charges.get()
                     description_val = self.input_Description.get("1.0", END)    # direct value get by varialbe
@@ -168,7 +168,7 @@ class StudentCls:
         # ['1', 'python', '3 months', '30000', 'xyz']
         # [ 0      1           2         3       4(direct-text)]
 
-        self.var_course.set(row[1])     # using set function hear
+        self.var_rollno.set(row[1])     # using set function hear
         self.var_duration.set(row[2])
         self.var_charges.set(row[3])
 
@@ -180,16 +180,16 @@ class StudentCls:
         # conn_obj = mq.connect(host="localhost", user="root", password="", database="project_lms")
         # cursor_obj = conn_obj.cursor()
         try:
-            # if self.var_course.get() != "":
-            #     name_val = self.var_course.get()   # geting course name and storing into the variable
+            # if self.var_rollno.get() != "":
+            #     name_val = self.var_rollno.get()   # geting course name and storing into the variable
             #     Cur_name = fetch_tabel_data_one("course", "name", name_val)  # calling function
             #     # print(Cur_name)
             #     if Cur_name != None:
             #         messagebox.showerror("Error","Course name already exist", parent=self.root)
-            if self.var_course.get()=="":    # validation
+            if self.var_rollno.get()=="":    # validation
                 messagebox.showerror("Error","Please select a course", parent=self.root)
             else:
-                name_val = self.var_course.get()    # values getting form different fields
+                name_val = self.var_rollno.get()    # values getting form different fields
                 duration_val = self.var_duration.get()
                 charges_val = self.var_charges.get()
                 description_val = self.input_Description.get("1.0", END)    # direct value get by varialbe
@@ -210,7 +210,7 @@ class StudentCls:
 # ======== this function is for clear the field data and enter new data ======= 
     def clear_data(self):
         self.show()
-        self.var_course.set("")
+        self.var_rollno.set("")
         self.var_duration.set("")
         self.var_charges.set("")
         self.var_search.set("")
@@ -221,12 +221,12 @@ class StudentCls:
 # ========= this function is work for delete record from table =======
     def delete_row(self):
         try:
-            if self.var_course.get()=="":
+            if self.var_rollno.get()=="":
                 messagebox.showerror("error", "Please select any course for delate", parent=self.root)
             else:
                 op = messagebox.askyesno("Confirm", "Are you want to delete", parent=self.root)
                 if op == True:
-                    var = self.var_course.get()
+                    var = self.var_rollno.get()
                     delete_record("course", var)
                     self.clear_data()
                     self.show()
