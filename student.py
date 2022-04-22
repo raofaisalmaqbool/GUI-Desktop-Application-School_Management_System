@@ -32,7 +32,9 @@ class StudentCls:
         self.var_contect = StringVar()
         self.var_course = StringVar()
         self.var_atdn_date = StringVar()
+        self.var_state = StringVar()
         self.var_city = StringVar()
+        self.var_pin = StringVar()
 
         # =========== Label of input fields (fields titles) =============
         Student_Rollno = Label(self.root, text="Roll No", font=(
@@ -43,6 +45,10 @@ class StudentCls:
             "goudy old style", 15, "bold"), bg="white", fg="black").place(x=10, y=160)
         Student_Gender = Label(self.root, text="Gender", font=(
             "goudy old style", 15, "bold"), bg="white", fg="black").place(x=10, y=200)
+        Student_State = Label(self.root, text="State", font=(
+            "goudy old style", 15, "bold"), bg="white", fg="black").place(x=10, y=240)
+        Student_Address = Label(self.root, text="Address", font=(
+            "goudy old style", 15, "bold"), bg="white", fg="black").place(x=10, y=280)
 
         # =========== input fields ============  textvariable is keyword
         self.input_rollno = Entry(self.root, textvariable=self.var_rollno, font=(
@@ -56,10 +62,13 @@ class StudentCls:
         self.input_gender = ttk.Combobox(self.root, textvariable=self.var_gender, values=("Select","Male","Female"), font=(
             "goudy old style", 15, "bold"), state="readonly", justify=CENTER)
         self.input_gender.place(x=150, y=200, width=200)
-        
+        self.input_gender.current(0)
+        input_state = Entry(self.root, textvariable=self.var_state, font=(
+            "goudy old style", 15, "bold"), bg="lightyellow", fg="black").place(x=150, y=240, width=200)
         self.input_address = Text(self.root, font=(
             "goudy old style", 15, "bold"), bg="lightyellow", fg="black")
-        self.input_address.place(x=150, y=240, height=120, width=470)
+        self.input_address.place(x=150, y=280, height=30, width=200)
+
 
         # ========== operational buttons ============
         self.btn_save = Button(self.root, text="Save", font=(
