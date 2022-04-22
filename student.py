@@ -1,5 +1,6 @@
 from cProfile import label
-from tkinter import *      # python library used of GUI programming
+from tkinter import *
+from tokenize import String      # python library used of GUI programming
 from PIL import Image, ImageTk
 from tkinter import ttk, messagebox
 import pymysql as mq
@@ -24,8 +25,14 @@ class StudentCls:
 
         # ======= Variables ==========   will store the given value form user
         self.var_rollno = StringVar()
-        self.var_duration = StringVar()
-        self.var_charges = StringVar()
+        self.var_name = StringVar()
+        self.var_email = StringVar()
+        self.var_gender = StringVar()
+        self.var_dob = StringVar()
+        self.var_contect = StringVar()
+        self.var_course = StringVar()
+        self.var_atdn_date = StringVar()
+        self.var_city = StringVar()
 
         # =========== Label of input fields (fields titles) =============
         Student_Rollno = Label(self.root, text="Roll No", font=(
@@ -38,17 +45,21 @@ class StudentCls:
             "goudy old style", 15, "bold"), bg="white", fg="black").place(x=10, y=200)
 
         # =========== input fields ============  textvariable is keyword
-        self.input_Name = Entry(self.root, textvariable=self.var_rollno, font=(
+        self.input_rollno = Entry(self.root, textvariable=self.var_rollno, font=(
             "goudy old style", 15, "bold"), bg="lightyellow", fg="black")
         # will show input fields
-        self.input_Name.place(x=150, y=80, width=200)
-        input_Duration = Entry(self.root, textvariable=self.var_duration, font=(
+        self.input_rollno.place(x=150, y=80, width=200)
+        input_name = Entry(self.root, textvariable=self.var_name, font=(
             "goudy old style", 15, "bold"), bg="lightyellow", fg="black").place(x=150, y=120, width=200)
-        input_Charges = Entry(self.root, textvariable=self.var_charges, font=(
+        input_email = Entry(self.root, textvariable=self.var_name, font=(
             "goudy old style", 15, "bold"), bg="lightyellow", fg="black").place(x=150, y=160, width=200)
-        self.input_Description = Text(self.root, font=(
+        self.input_gender = ttk.Combobox(self.root, textvariable=self.var_gender, values=("Select","Male","Female"), font=(
+            "goudy old style", 15, "bold"), state="readonly", justify=CENTER)
+        self.input_gender.place(x=150, y=200, width=200)
+        
+        self.input_address = Text(self.root, font=(
             "goudy old style", 15, "bold"), bg="lightyellow", fg="black")
-        self.input_Description.place(x=150, y=200, height=120, width=470)
+        self.input_address.place(x=150, y=240, height=120, width=470)
 
         # ========== operational buttons ============
         self.btn_save = Button(self.root, text="Save", font=(
@@ -159,8 +170,8 @@ class StudentCls:
 
     # =========== this is for show table data in the fields for update ========
     def get_data(self, evnt):    #2nd   # for binding event one argument is mendetory "evnt"
-        self.input_Name.config(state="readonly")
-        self.input_Name
+        self.input_rollno.config(state="readonly")
+        # self.input_rollno
         r=self.courseTable.focus()
         content = self.courseTable.item(r)
         row = content["values"]
@@ -215,7 +226,7 @@ class StudentCls:
         self.var_charges.set("")
         self.var_search.set("")
         self.input_Description.delete('1.0', END)
-        self.input_Name.config(state=NORMAL)    # state was readonly but now its normal
+        self.input_rollno.config(state=NORMAL)    # state was readonly but now its normal
 
 
 # ========= this function is work for delete record from table =======
@@ -230,7 +241,7 @@ class StudentCls:
                     delete_record("course", var)
                     self.clear_data()
                     self.show()
-                    self.input_Name.config(state=NORMAL)
+                    self.input_rollno.config(state=NORMAL)
                     messagebox.showinfo("Success","Record deleted", parent=self.root)
 
         except Exception as ex:
@@ -248,7 +259,7 @@ class StudentCls:
                 self.courseTable.delete(*self.courseTable.get_children())     # will delete all pre childern element of table 
                 for row in rows:    # will show the data in tabel by itreating
                     self.courseTable.insert('', END, values=row)
-                # self.input_Name.config(state=NORMAL)
+                # self.input_rollno.config(state=NORMAL)
                 
         except Exception as ex:
             print(ex)
