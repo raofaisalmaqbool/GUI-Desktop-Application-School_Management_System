@@ -242,7 +242,13 @@ class CourseCls:
             if self.var_search.get() == "":
                 messagebox.showerror("Alert","Please enter something", parent=self.root)
             else:
-                self.var_search
+                in_data = self.var_search.get()
+                rows = search_data("course", in_data)
+                # print(rows)
+                self.courseTable.delete(*self.courseTable.get_children())     # will delete all pre childern element of table 
+                for row in rows:    # will show the data in tabel by itreating
+                    self.courseTable.insert('', END, values=row)
+                
         except Exception as ex:
             print(ex)
         

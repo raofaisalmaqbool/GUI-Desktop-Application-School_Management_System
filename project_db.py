@@ -97,6 +97,18 @@ def delete_record(table_name,by_name):
     except Exception as ex:
         print(ex)
 
+# ========= this will retrive data by searching in search box ==========
+def search_data(table_name, search_txt):
+    conn_obj = mq.connect(host="localhost", user="root", password="", database="project_lms")
+    cursor_obj = conn_obj.cursor()
+    try:
+        srch_data = f"SELECT * FROM {table_name} WHERE name like '%{search_txt}%'"
+        cursor_obj.execute(srch_data)
+        retrive_data = cursor_obj.fetchall()   # fetch all exist data / rows
+        return retrive_data
+    except Exception as ex:
+        print(ex)
+
 # create_db("project_lms")
 # create_table("course", "cid INT AUTO_INCREMENT PRIMARY KEY, name VARCHAR(255), duration VARCHAR(255), charges VARCHAR(255), description TEXT")
 # # insert_data("course", '''(name, duration, charges, description)''', '''("faisal","3 months","4500","abc")''')
