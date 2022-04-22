@@ -68,10 +68,10 @@ class CourseCls:
         self.var_search = StringVar()
         Course_Name = Label(self.root, text="Course Name", font=(
             "goudy old style", 15, "bold"), bg="white", fg="black").place(x=660, y=80)
-        input_Course_Name = Entry(self.root, textvariable=self.var_search, font=(
+        input_Course_Name = Entry(self.root, textvariable=self.var_search,font=(
             "goudy old style", 15, "bold"), bg="lightyellow", fg="black").place(x=810, y=80, width=250)
         btn_Course_Search = Button(self.root, text="Search", font=(
-            "goudy old style", 15, "bold"), bg="#4caf50", fg="white", cursor="hand2").place(x=1090, y=80, width=100, height=27)
+            "goudy old style", 15, "bold"), bg="#4caf50", fg="white", cursor="hand2", command=self.search_bar).place(x=1090, y=80, width=100, height=27)
 
         # ======= content / record of courses ========
         self.C_Frame = Frame(self.root, bd=2, relief=RIDGE)
@@ -235,6 +235,16 @@ class CourseCls:
 
         except Exception as ex:
             pass
+
+
+    def search_bar(self):
+        try:
+            if self.var_search.get() == "":
+                messagebox.showerror("Alert","Please enter something", parent=self.root)
+            else:
+                self.var_search
+        except Exception as ex:
+            print(ex)
         
 
 
