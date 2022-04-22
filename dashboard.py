@@ -1,6 +1,7 @@
 from tkinter import *      # python library used of GUI programming
 from PIL import Image, ImageTk
 from courses import *
+from student import *
 
 
 class LMS:
@@ -35,7 +36,7 @@ class LMS:
                              bg="#0b5377", fg="white", cursor="hand2").place(x=20, y=5, height=40, width=200)
         but_teachers = Button(M_Frame, text="Teachers", font=("goudy old style", 15, "bold"),
                               bg="#0b5377", fg="white", cursor="hand2").place(x=240, y=5, height=40, width=200)
-        but_students = Button(M_Frame, text="Students", font=("goudy old style", 15, "bold"),
+        but_students = Button(M_Frame, text="Students", font=("goudy old style", 15, "bold"), command=self.add_student,
                               bg="#0b5377", fg="white", cursor="hand2").place(x=460, y=5, height=40, width=200)
         but_result = Button(M_Frame, text="Result", font=("goudy old style", 15, "bold"),
                             bg="#0b5377", fg="white", cursor="hand2").place(x=680, y=5, height=40, width=200)
@@ -84,9 +85,17 @@ class LMS:
         self.course_obj = CourseCls(self.course_win)   # object of CourseCls class
 
 
+    #====== function for add student window ========
+    # ==== call this function on student button using command ========
+    def add_student(self):
+        self.course_win = Toplevel(self.root)    # attribute for student window
+        self.course_obj = StudentCls(self.course_win)   # object of StudentCls class
+
+
 if __name__ == "__main__":     # it is using because i will deale with multiple files
     root = Tk()      # object of tkinter library
     # object of LMS class having arggument root(object of tkinter libraroy)
     obj_lms = LMS(root)
 
     root.mainloop()   # it for stop the window secren of tkinter
+ 
