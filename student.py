@@ -1,10 +1,10 @@
 from cProfile import label
 from tkinter import *
-from tokenize import String      # python library used of GUI programming
+# from tokenize import String      # python library used of GUI programming
 from PIL import Image, ImageTk
 from tkinter import ttk, messagebox
 import pymysql as mq
-from project_db import *
+from project_db import insert_student, fetch_all_students, fetch_student_by_roll, update_student, delete_student, search_students
 
 
 class StudentCls:
@@ -20,7 +20,7 @@ class StudentCls:
 
         # ==== Title bar ======
         # set the title bar.. heading... darkblue background         "fg used for font"
-        title_bar = Label(self.root, text="Manage Course Details", font=(
+        title_bar = Label(self.root, text="Manage Student Details", font=(
             "goudy old style", 20, "bold"), bg="#0b5377", fg="white").place(x=10, y=15, width=1180, height=35)
 
         # ======= Variables ==========   will store the given value form user
@@ -57,7 +57,7 @@ class StudentCls:
         self.input_rollno.place(x=150, y=80, width=200)
         input_name = Entry(self.root, textvariable=self.var_name, font=(
             "goudy old style", 15, "bold"), bg="lightyellow", fg="black").place(x=150, y=120, width=200)
-        input_email = Entry(self.root, textvariable=self.var_name, font=(
+        input_email = Entry(self.root, textvariable=self.var_email, font=(
             "goudy old style", 15, "bold"), bg="lightyellow", fg="black").place(x=150, y=160, width=200)
         self.input_gender = ttk.Combobox(self.root, textvariable=self.var_gender, values=("Select","Male","Female"), font=(
             "goudy old style", 15, "bold"), state="readonly", justify=CENTER)
@@ -86,7 +86,7 @@ class StudentCls:
 
         # ========== Search Area ============
         self.var_search = StringVar()
-        Course_Name = Label(self.root, text="Course Name", font=(
+        Course_Name = Label(self.root, text="Roll No / Name", font=(
             "goudy old style", 15, "bold"), bg="white", fg="black").place(x=660, y=80)
         input_Course_Name = Entry(self.root, textvariable=self.var_search,font=(
             "goudy old style", 15, "bold"), bg="lightyellow", fg="black").place(x=810, y=80, width=250)
@@ -104,7 +104,7 @@ class StudentCls:
 
         # ======= create table layout ========
         self.courseTable = ttk.Treeview(self.C_Frame, columns=(
-            "cid", "name", "duration", "charges", "description"), xscrollcommand=scrollx.set, yscrollcommand=scrolly.set)
+            "sid", "roll_no", "name", "email", "gender", "state", "address"), xscrollcommand=scrollx.set, yscrollcommand=scrolly.set)
 
         scrollx.pack(side=BOTTOM, fill=X)    # showing side bar
         scrolly.pack(side=RIGHT, fill=Y)
@@ -112,20 +112,24 @@ class StudentCls:
         scrollx.config(command=self.courseTable.xview)   # for view x and y of scrol bar
         scrolly.config(command=self.courseTable.yview)   # this will move up and down, left and right easily
 
-        self.courseTable.heading("cid", text="ID")       # create table heading
+        self.courseTable.heading("sid", text="ID")       # create table heading
+        self.courseTable.heading("roll_no", text="Roll No")
         self.courseTable.heading("name", text="Name")
-        self.courseTable.heading("duration", text="Duration")
-        self.courseTable.heading("charges", text="Charges")
-        self.courseTable.heading("description", text="Description")
+        self.courseTable.heading("email", text="Email")
+        self.courseTable.heading("gender", text="Gender")
+        self.courseTable.heading("state", text="State")
+        self.courseTable.heading("address", text="Address")
 
         # show only heading colomn not extra one
         self.courseTable["show"] = "headings"
 
-        self.courseTable.column("cid", width=10)       # create table colomn
-        self.courseTable.column("name", width=50)
-        self.courseTable.column("duration", width=50)
-        self.courseTable.column("charges", width=50)
-        self.courseTable.column("description", width=130)
+        self.courseTable.column("sid", width=10)       # create table colomn
+        self.courseTable.column("roll_no", width=80)
+        self.courseTable.column("name", width=120)
+        self.courseTable.column("email", width=150)
+        self.courseTable.column("gender", width=70)
+        self.courseTable.column("state", width=100)
+        self.courseTable.column("address", width=150)
 
         self.courseTable.pack(fill=BOTH, expand=1)    # show create table layout
 
@@ -136,105 +140,94 @@ class StudentCls:
     #==========  backend functions start ============
 
     def save(self):
-        # conn_obj = mq.connect(host="localhost", user="root", password="", database="project_lms")
-        # cursor_obj = conn_obj.cursor()
         try:
-            if self.var_rollno.get() != "":
-                name_val = self.var_rollno.get()      # geting course name and storing into the variable
-                Cur_name = fetch_tabel_data_one("course", "name", name_val)  # calling function
-                # print(Cur_name)
-                if Cur_name != None:
-                    messagebox.showerror("Error","Course name already exist", parent=self.root)
-                else:
-                    name_val = self.var_rollno.get()    # values getting form different fields
-                    duration_val = self.var_duration.get()
-                    charges_val = self.var_charges.get()
-                    description_val = self.input_Description.get("1.0", END)    # direct value get by varialbe
-                    input_tuple = (name_val, duration_val, charges_val, description_val)
-                    # labels = (name, duration, charges, description)
+            if self.var_rollno.get() == "" or self.var_name.get() == "":
+                messagebox.showerror("Error","Roll No and Name are required", parent=self.root)
+                return
 
-                    #========= calling functions of insert_data =======
-                    insert_data("course", '''(name, duration, charges, description)''', input_tuple) 
-                    self.show()
-            
-            else:    # validation
-                messagebox.showerror("Error","Course name should be required", parent=self.root)
-              
-                
+            roll_no = self.var_rollno.get()
+            existing = fetch_student_by_roll(roll_no)
+            if existing is not None:
+                messagebox.showerror("Error","Student with this Roll No already exists", parent=self.root)
+                return
+
+            name_val = self.var_name.get()
+            email_val = self.var_email.get()
+            gender_val = self.var_gender.get()
+            state_val = self.var_state.get()
+            address_val = self.input_address.get("1.0", END).strip()
+            data = (roll_no, name_val, email_val, gender_val, state_val, address_val)
+
+            insert_student(data)
+            self.show()
+            messagebox.showinfo("Success","Student added successfully", parent=self.root)
+
         except Exception as ex:
-            messagebox.showerror("Error", f"Error due to {str(ex)}")
+            messagebox.showerror("Error", f"Error due to {str(ex)}", parent=self.root)
 
     # ===== This will show the data in the table ========
     def show(self):   # 1st
         try:
-            rows = fetch_tabel_data("course")
-            # print(rows)
+            rows = fetch_all_students()
             self.courseTable.delete(*self.courseTable.get_children())     # will delete all pre childern element of table 
             for row in rows:    # will show the data in tabel by itreating
                 self.courseTable.insert('', END, values=row)
 
         except Exception as ex:
-            messagebox.showerror("Error", f"Error due to {str(ex)}")
+            messagebox.showerror("Error", f"Error due to {str(ex)}", parent=self.root)
 
 
     # =========== this is for show table data in the fields for update ========
     def get_data(self, evnt):    #2nd   # for binding event one argument is mendetory "evnt"
         self.input_rollno.config(state="readonly")
-        # self.input_rollno
         r=self.courseTable.focus()
         content = self.courseTable.item(r)
         row = content["values"]
-        # print(row)
-        # ['1', 'python', '3 months', '30000', 'xyz']
-        # [ 0      1           2         3       4(direct-text)]
+
+        if not row:
+            return
 
         self.var_rollno.set(row[1])     # using set function hear
-        self.var_duration.set(row[2])
-        self.var_charges.set(row[3])
+        self.var_name.set(row[2])
+        self.var_email.set(row[3])
+        self.var_gender.set(row[4])
+        self.var_state.set(row[5])
 
-        self.input_Description.delete('1.0', END)
-        self.input_Description.insert(END, row[4])
+        self.input_address.delete('1.0', END)
+        self.input_address.insert(END, row[6])
 
 
     def update(self):
-        # conn_obj = mq.connect(host="localhost", user="root", password="", database="project_lms")
-        # cursor_obj = conn_obj.cursor()
         try:
-            # if self.var_rollno.get() != "":
-            #     name_val = self.var_rollno.get()   # geting course name and storing into the variable
-            #     Cur_name = fetch_tabel_data_one("course", "name", name_val)  # calling function
-            #     # print(Cur_name)
-            #     if Cur_name != None:
-            #         messagebox.showerror("Error","Course name already exist", parent=self.root)
             if self.var_rollno.get()=="":    # validation
-                messagebox.showerror("Error","Please select a course", parent=self.root)
+                messagebox.showerror("Error","Please select a student", parent=self.root)
             else:
-                name_val = self.var_rollno.get()    # values getting form different fields
-                duration_val = self.var_duration.get()
-                charges_val = self.var_charges.get()
-                description_val = self.input_Description.get("1.0", END)    # direct value get by varialbe
-                input_tuple = (duration_val, charges_val, description_val, name_val)
-                # labels = (name, duration, charges, description)
+                roll_no = self.var_rollno.get()
+                name_val = self.var_name.get()
+                email_val = self.var_email.get()
+                gender_val = self.var_gender.get()
+                state_val = self.var_state.get()
+                address_val = self.input_address.get("1.0", END).strip()
+                data = (name_val, email_val, gender_val, state_val, address_val, roll_no)
 
-                #========= calling functions of insert_data =======
-                # insert_data("course", '''(name, duration, charges, description)''', input_tuple) 
-                update_data("course", input_tuple)
+                update_student(data)
                 self.show()
                 messagebox.showinfo("Success","Record Updated Successfully!!!!!", parent=self.root)
-              
-                
+
         except Exception as ex:
-            messagebox.showerror("Error", f"Error due to {str(ex)}")
+            messagebox.showerror("Error", f"Error due to {str(ex)}", parent=self.root)
 
 
 # ======== this function is for clear the field data and enter new data ======= 
     def clear_data(self):
         self.show()
         self.var_rollno.set("")
-        self.var_duration.set("")
-        self.var_charges.set("")
+        self.var_name.set("")
+        self.var_email.set("")
+        self.var_gender.set("")
+        self.var_state.set("")
         self.var_search.set("")
-        self.input_Description.delete('1.0', END)
+        self.input_address.delete('1.0', END)
         self.input_rollno.config(state=NORMAL)    # state was readonly but now its normal
 
 
@@ -242,12 +235,12 @@ class StudentCls:
     def delete_row(self):
         try:
             if self.var_rollno.get()=="":
-                messagebox.showerror("error", "Please select any course for delate", parent=self.root)
+                messagebox.showerror("error", "Please select any student to delete", parent=self.root)
             else:
                 op = messagebox.askyesno("Confirm", "Are you want to delete", parent=self.root)
                 if op == True:
                     var = self.var_rollno.get()
-                    delete_record("course", var)
+                    delete_student(var)
                     self.clear_data()
                     self.show()
                     self.input_rollno.config(state=NORMAL)
@@ -263,7 +256,7 @@ class StudentCls:
                 messagebox.showerror("Alert","Please enter something", parent=self.root)
             else:
                 in_data = self.var_search.get()
-                rows = search_data("course", in_data)
+                rows = search_students(in_data)
                 # print(rows)
                 self.courseTable.delete(*self.courseTable.get_children())     # will delete all pre childern element of table 
                 for row in rows:    # will show the data in tabel by itreating

@@ -2,6 +2,7 @@ from tkinter import *      # python library used of GUI programming
 from PIL import Image, ImageTk
 from courses import *
 from student import *
+from config import LOGO_SMALL, MAIN_IMAGE
 
 
 class LMS:
@@ -16,7 +17,7 @@ class LMS:
 
         # ==== Logo ======
         # this is due to resize the image
-        self.logo = Image.open("img/logo-small.png")
+        self.logo = Image.open(LOGO_SMALL)
         self.logo = self.logo.resize((40, 40), Image.ANTIALIAS)   # resizing the image
         self.logo = ImageTk.PhotoImage(self.logo)  # adding image with title,, dont know the path of image
         # self.logo = ImageTk.PhotoImage(file="img/logo-small.png")
@@ -47,7 +48,7 @@ class LMS:
         # but_exit = Button(M_Frame, text="Exit", font=("goudy old style",15,"bold"), bg="#0b5377", fg="white", cursor="hand2").place(x=1050, y=5, height=40, width=200)
 
         # this is due to resize the image
-        self.main_img = Image.open("img/img2.png")
+        self.main_img = Image.open(MAIN_IMAGE)
         self.main_img = self.main_img.resize(
             (760, 350), Image.ANTIALIAS)   # resizing the image
         # adding image with title,, dont know the path of image
